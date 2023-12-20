@@ -1,122 +1,86 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote</title>
 
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
 
-	<!-- Google Font -->
+        .widget {
+            padding: 5px 5px ;
+            color: #000000;
+            text-align: center;
+                max-width: 95%;
+            margin: auto;
+            font-variant-caps: petite-caps;
+            font-size: 2em;
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+        }
 
-	<!-------->
+        div {
+             width: 95%;
+             min-height: 100px;
 
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-			-webkit-box-sizing: border-box;
-			box-sizing: border-box;
-		}
+            background:
+                linear-gradient(to right, black 4px, transparent 4px) 0 0,
+                linear-gradient(to right, black 4px, transparent 4px) 0 100%,
+                linear-gradient(to left, black 4px, transparent 4px) 100% 0,
+                linear-gradient(to left, black 4px, transparent 4px) 100% 100%,
+                linear-gradient(to bottom, black 4px, transparent 4px) 0 0,
+                linear-gradient(to bottom, black 4px, transparent 4px) 100% 0,
+                linear-gradient(to top, black 4px, transparent 4px) 0 100%,
+                linear-gradient(to top, black 4px, transparent 4px) 100% 100%;
 
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+}
 
-		.navMenu {
-			font-family: 'Advent Pro', sans-serif;
-			padding: 8px;
-			text-align: center;
-			margin: 7px auto;
-			width: fit-content;
-		}
-
-		.navMenu a {
-			color: #272727;
-			text-decoration: none;
-			text-transform: uppercase;
-			display: inline-block;
-			padding: 6px;
-		}
-
-		.background {
-			background-color: #ece5f0;
-		}
-
-		.border {
-			border: 1px solid #cccccc;
-
-		}
-
-		.navMenu a:hover {
-
-			color: #d09c0b;
-		}
-	</style>
+     
+    </style>
 </head>
-
 <body>
 
-	<nav class="navMenu  border">
-		<a id="home" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-house"></i> Home</a>
-		<a id="inbox" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-inbox"></i> Inbox</a>
-		<a id="week" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-calendar-week"></i> Planner</a>
-		<a id="projects" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-briefcase"></i> Projects</a>
-		<a id="tasks" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-list-check"></i> Tasks</a>
-		<a id="business" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-money-bill-wave"></i> Business</a>
-		<a id="knowledge" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-lightbulb"></i> Knowledge</a>
-		<a id="topics" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-layer-group"></i> Topics</a>
-		<a id="notes" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-book"></i> Notes</a>
-		<a id="media" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-bookmark"></i> Media</a>
-		<a id="resources" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-wrench"></i> Resources</a>
-		<a id="lifewiki" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-heart"></i> Lifewiki</a>
+    <div class="widget" id="widget"></div>
 
 
+<script>
 
-	</nav>
+quotes=[
+"Learning, like success, is anything but a linear process",
+"I am in competition with no one. I have no desire to play the game of being better than anyone. I am simply trying to be better than the person I was yesterday.",
+"If you want to be interesting, you have to be interested.",
+"It's supposed to be hard. If it were easy, everyone would do it.",
+"Don’t worry if you’re not where you want to be yet. Great things take time. ",
+"If it's important you'll find a way. If it's not, you'll find an excuse.",
+"Most people overestimate what they can do in one year and underestimate what they can do in ten years.",
+"A goal without a plan is just a wish.",
+"change your 24 hours and you'll change your life",
+"Stop thinking you are not qualified, not fit, or not experienced enough,",
+"Growth takes place when you start doing stuff you are not qualified to do.",
+"Be who you are and say what you feel, because those who mind don't matter, and those who matter don't mind.",
+"Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do. So throw off the bowlines. Sail away from the safe harbor. Catch the trade winds in your sails. Explore. Dream. Discover.",
+];
 
+const INTERVAL = 86400000;
 
-	<script>
+function dispalyQuote(){
 
-		let direction = "horizontal";
-		if (direction === "vertical") {
-			document.head.insertAdjacentHTML("beforeend", `<style>.navMenu a {display: block; text-align:left; margin:7px} i{width:15px; margin-right:5px} .navMenu{margin:3px}</style>`)
-		}
+    document.getElementById('widget').innerHTML =quotes[0];
+    quotes.forEach((quote, i) => {
+        setTimeout(() => {
+            document.getElementById('widget').innerHTML =quote;
+        }, i * INTERVAL);  
+    });
+    }
 
+    function dispalyWidget() {
+        dispalyQuote();
+        setTimeout(dispalyWidget, quotes.length*INTERVAL);
+    }
+    dispalyWidget()
 
-		function navigate(id) {
-
-			if (id == 'home')
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "inbox")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "week")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "month")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "projects")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "business")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "tasks")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "knowledge")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "topics")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "notes")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "media")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "resourses")
-				window.open("https://example.com3", '_blank').focus();
-			else if (id == "lifewiki")
-				window.open("https://example.com", '_blank').focus();
-
-		}
-	</script>
-
+</script>
 
 </body>
-
 </html>
